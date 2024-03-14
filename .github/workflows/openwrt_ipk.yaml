@@ -9,9 +9,9 @@ on:
         required: true
         default: "0.0.1"
       target:
-        description: 'build target ["arm64", "x64", "mipsel"]'
+        description: 'build target ["arm64", "x64", "mipsel", "arm_cortex-a9_vfpv3-d16"]'
         required: true
-        default: "x64"
+        default: "arm_cortex-a9_vfpv3-d16"
 env:
   TZ: Asia/Shanghai
   IPK_NAME: luci-app-tailscaler
@@ -31,7 +31,7 @@ jobs:
           MATRIX_TARGET: ${{ github.event.inputs.target }}
         run: |
           if [ "x${MATRIX_TARGET}" = "x" -o "x${MATRIX_TARGET}" = "xall" ]; then \
-            echo "matrix={\"target\":[\"arm64\", \"x64\", \"mipsel\"]}" >> $GITHUB_OUTPUT; \
+            echo "matrix={\"target\":[\"arm64\", \"x64\", \"mipsel\", \"arm_cortex-a9_vfpv3-d16\"]}" >> $GITHUB_OUTPUT; \
           else \
             targets=""; \
             for target in ${MATRIX_TARGET}; do \
